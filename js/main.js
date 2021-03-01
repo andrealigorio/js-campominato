@@ -52,8 +52,8 @@ while (flag == false) {
     }
 }
 arrayUser.push(userNumber);
-
-while ((!inArray(pcArrayNumber, userNumber)) || ((arrayUser.length - 1) == (difficulty - pcRandomNumber))) {
+// Il ciclo while termina se il numero utente fa parte dell'array numeri perdenti o se la lunghezza dell'array utente raggiunge la differenza tra i numeri totali e quelli perdenti
+while ((!inArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficulty - pcRandomNumber))) {
     flag = false;
     while (flag == false) {
         userNumber = prompt("Inserisci un numero da 1 a " + difficulty);
@@ -74,8 +74,14 @@ while ((!inArray(pcArrayNumber, userNumber)) || ((arrayUser.length - 1) == (diff
     }
 }
 
-punteggio = arrayUser.length - 1;       //-1 perchè nell'array dell'utente salvo in ultima posizione il numero perdente
-alert("La partita è terminata ed hai fatto " + punteggio + " punti.\nPurtroppo il numero " + arrayUser[punteggio] + " era un numero perdente\nI numeri perdenti erano " + pcArrayNumber);
+/* Con un if controllo se è stato raggiunto il punteggio massimo o è stato pescato un numero perdente */
+if ((!inArray(pcArrayNumber, arrayUser[(arrayUser.length-1)])) && arrayUser.length == (difficulty - pcRandomNumber)) {
+    punteggio = arrayUser.length;
+    alert("Complimenti hai fatto il punteggio massimo: " + arrayUser.length + " punti\nI numeri perdenti erano " + pcArrayNumber);
+} else {
+    punteggio = arrayUser.length - 1;       //-1 perchè nell'array dell'utente salvo in ultima posizione il numero perdente
+    alert("La partita è terminata ed hai fatto " + punteggio + " punti.\nPurtroppo il numero " + arrayUser[punteggio] + " era un numero perdente\nI numeri perdenti erano " + pcArrayNumber);
+}
 
 console.log(arrayUser);
 console.log(punteggio);
