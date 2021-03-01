@@ -16,6 +16,7 @@ while (flag == false) {
         case "2":
             difficulty = 50;
             flag = true;
+            break;
         default:
             alert("Devi inserire un numero da 0 a 2!");
     }
@@ -27,7 +28,7 @@ var punteggio;
 var i = 1;
 
 while (i < pcRandomNumber) {
-    pcArrayNumber.push(randomNumber(1, 100));           //Aggiungo secondo numero all'array
+    pcArrayNumber.push(randomNumber(1, difficulty));           //Aggiungo secondo numero all'array
     for (j = pcArrayNumber.length - 1; j > 0; j--) {             //Con un ciclo for inverso controllo che l'ultimo numero generato non sia uguale ai precedenti
     if (pcArrayNumber[(pcArrayNumber.length-1)] == pcArrayNumber[j-1]) {
         pcArrayNumber.pop();                        //In caso viene generato un numero uguale lo elimino
@@ -42,7 +43,7 @@ console.log(pcArrayNumber);
 flag = false;
 while (flag == false) {
     userNumber = prompt("Inserisci un numero da 1 a " + difficulty);
-    if (isNaN(userNumber)) {
+    if (isNaN(userNumber) || (userNumber.includes("."))) {
         alert("inserisci un numero!!!")
     } else if ((userNumber < 1) || (userNumber > difficulty)) {
         alert("Inserisci un numero compreso tra 1 e " + difficulty);
@@ -56,7 +57,7 @@ while ((!inArray(pcArrayNumber, userNumber)) || ((arrayUser.length - 1) == (diff
     flag = false;
     while (flag == false) {
         userNumber = prompt("Inserisci un numero da 1 a " + difficulty);
-        if (isNaN(userNumber)) {
+        if (isNaN(userNumber) || (userNumber.includes("."))) {
             alert("inserisci un numero!!!")
         } else if ((userNumber < 1) || (userNumber > difficulty)) {
             alert("Inserisci un numero compreso tra 1 e " + difficulty);
