@@ -1,4 +1,4 @@
-function myFunction() {
+function myFunctionStart() {
 
 const pcRandomNumber = 16;
 
@@ -68,15 +68,16 @@ while ((!isInArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficu
             }
             else {
                 box = document.getElementById("box" + userNumber);
-                box.className = "mine";
+                box.className = "mine_loser";
             }
         } else {
             alert("Numero già inserito... ripetere!");
         }
-}
-    
+    }
     punteggio = arrayUser.length;
     
+    console.log(arrayUser);
+    console.log(punteggio);
     /* Con un if controllo se è stato raggiunto il punteggio massimo o è stato pescato un numero perdente */
     if ((!isInArray(pcArrayNumber, arrayUser[arrayUser.length])) && arrayUser.length == (difficulty - pcRandomNumber)) {
         for(var i=0; i < pcArrayNumber.length; i++) {
@@ -87,28 +88,26 @@ while ((!isInArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficu
     } else {
         for (var i = 0; i < pcArrayNumber.length; i++) {
             box = document.getElementById("box" + pcArrayNumber[i]);
-            box.className = "mine";
+            box.classList.add("mine");
         }
         document.getElementById("result").innerHTML = "La partita è terminata ed hai fatto " + punteggio + " punti.";
     }
-    
-    console.log(arrayUser);
-    console.log(punteggio);
-    
-    function isInArray(array, value) {
-        for (var i = 0; i < array.length; i++) {
-            if (array[i] == value) {
-                return true;
-            }
-        }
-        return false;
-    }
-    
-    function randomNumber(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min);
-    }
-    
 }
+
+
+function isInArray(array, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == value) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function myFunctionReset() {
     location.reload();
 }

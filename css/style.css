@@ -45,6 +45,24 @@ body {
     width: 60px;
     height: 30px;
     cursor: pointer;
+    background-color: white;
+    color: #3725da;
+    border: 1px solid #3725da;
+    border-radius: 5px;
+}
+.btn_game button:hover {
+    background-color: #3725da;
+    color: #72e9e9;
+}
+.difficulty #level {
+    border: none;
+    padding: 10px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.difficulty #level:focus {
+    background-color: #3725da;
+    color: #72e9e9;
 }
 #minefield {
     width: 500px;
@@ -71,6 +89,9 @@ body {
     background-size: 80%;
     background-position: center;
     background-repeat: no-repeat;
+}
+.mine_loser {
+    background-color: #915ecf;
 }
 #result {
     text-align: center;
