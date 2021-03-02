@@ -21,39 +21,23 @@ while (flag == false) {
             alert("Devi inserire un numero da 0 a 2!");
     }
 }
-var pcArrayNumber = [randomNumber(1, difficulty)]; //Inizializzo un array con il primo numero random
+var pcArrayNumber = [];
 var userNumber; 
 var arrayUser = [];
 var punteggio;
-var i = 1;
 
-while (i < pcRandomNumber) {
-    pcArrayNumber.push(randomNumber(1, difficulty));           //Aggiungo secondo numero all'array
-    for (j = pcArrayNumber.length - 1; j > 0; j--) {             //Con un ciclo for inverso controllo che l'ultimo numero generato non sia uguale ai precedenti
-    if (pcArrayNumber[(pcArrayNumber.length-1)] == pcArrayNumber[j-1]) {
-        pcArrayNumber.pop();                        //In caso viene generato un numero uguale lo elimino
-        i--;                          //Eliminando un numero dell'array devo ridurre l'indice di un'unità per garantire sempre i 16 numeri totali
-    }      
-}
-i++;
+while (pcArrayNumber.length < pcRandomNumber) {
+    var pcNumber = randomNumber(1, difficulty);
+    if(!isInArray(pcArrayNumber, pcNumber)) {
+        pcArrayNumber.push(pcNumber);
+    }
 }
 
 console.log(pcArrayNumber);
 
-flag = false;
-while (flag == false) {
-    userNumber = prompt("Inserisci un numero da 1 a " + difficulty);
-    if (isNaN(userNumber) || (userNumber.includes("."))) {
-        alert("inserisci un numero!!!")
-    } else if ((userNumber < 1) || (userNumber > difficulty)) {
-        alert("Inserisci un numero compreso tra 1 e " + difficulty);
-    } else {
-        flag = true;
-    }
-}
-arrayUser.push(userNumber);
+
 // Il ciclo while termina se il numero utente fa parte dell'array numeri perdenti o se la lunghezza dell'array utente raggiunge la differenza tra i numeri totali e quelli perdenti
-while ((!inArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficulty - pcRandomNumber))) {
+while ((!isInArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficulty - pcRandomNumber))) {
     flag = false;
     while (flag == false) {
         userNumber = prompt("Inserisci un numero da 1 a " + difficulty);
@@ -65,30 +49,30 @@ while ((!inArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficult
             flag = true;
         }
     }
-    arrayUser.push(userNumber);
-    for (j = arrayUser.length - 1; j > 0; j--) {
-        if(arrayUser[(arrayUser.length-1)] == arrayUser[j-1]) {
-            alert("Numero già inserito... ripetere!");
-            arrayUser.pop();
+    if (!isInArray(arrayUser, userNumber)) {
+        if (!isInArray(pcArrayNumber, userNumber)) {
+            arrayUser.push(userNumber);
         }
+    } else {
+        alert("Numero già inserito... ripetere!");
     }
 }
 
+punteggio = arrayUser.length;
+
 /* Con un if controllo se è stato raggiunto il punteggio massimo o è stato pescato un numero perdente */
-if ((!inArray(pcArrayNumber, arrayUser[(arrayUser.length-1)])) && arrayUser.length == (difficulty - pcRandomNumber)) {
-    punteggio = arrayUser.length;
+if ((!isInArray(pcArrayNumber, arrayUser[arrayUser.length])) && arrayUser.length == (difficulty - pcRandomNumber)) {
     alert("Complimenti hai fatto il punteggio massimo: " + arrayUser.length + " punti\nI numeri perdenti erano " + pcArrayNumber);
 } else {
-    punteggio = arrayUser.length - 1;       //-1 perchè nell'array dell'utente salvo in ultima posizione il numero perdente
-    alert("La partita è terminata ed hai fatto " + punteggio + " punti.\nPurtroppo il numero " + arrayUser[punteggio] + " era un numero perdente\nI numeri perdenti erano " + pcArrayNumber);
+    alert("La partita è terminata ed hai fatto " + punteggio + " punti.\nPurtroppo il numero " + userNumber + " era un numero perdente\nI numeri perdenti erano " + pcArrayNumber);
 }
 
 console.log(arrayUser);
 console.log(punteggio);
 
-function inArray(array, number) {
-    for (i = 0; i < array.length; i++) {
-        if (array[i] == number) {
+function isInArray(array, value) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == value) {
             return true;
         }
     }
