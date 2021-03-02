@@ -41,9 +41,10 @@ body {
     color: #3725da;
     padding: 10px 0;
 }
-.btn_start #btn {
+.btn_game button {
     width: 60px;
     height: 30px;
+    cursor: pointer;
 }
 #minefield {
     width: 500px;

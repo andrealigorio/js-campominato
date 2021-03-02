@@ -1,4 +1,5 @@
 function myFunction() {
+
 const pcRandomNumber = 16;
 
 var difficulty;
@@ -107,4 +108,7 @@ while ((!isInArray(pcArrayNumber, userNumber)) && ((arrayUser.length) < (difficu
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     
+}
+function myFunctionReset() {
+    location.reload();
 }
